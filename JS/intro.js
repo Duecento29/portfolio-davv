@@ -1,89 +1,89 @@
-/* Original artwork stays intact; all drawing, masking and rotation happen in the browser. */
+/* Approved Test C: one continuous artwork from the surface to the rotating circle. */
 (() => {
-  'use strict';
-  const key='davv_intro_v3';
-  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
-  const replay=document.createElement('button');
-  replay.className='intro-replay';replay.textContent='Rivedi intro';
-  document.body.append(replay);
-  let running=false;
-  async function play(){
-    if(running)return;running=true;
-    const previous=document.activeElement;
-    const overlay=document.createElement('div');
-    overlay.className='intro-film';overlay.setAttribute('role','dialog');
-    overlay.setAttribute('aria-modal','true');overlay.setAttribute('aria-label','Introduzione al portfolio di Tommaso Caputo');
-    overlay.innerHTML=`<div class="intro-backdrop"></div><div class="intro-orbit"><div class="intro-disc"><img src="assets/intro/Try.png" alt=""></div><div class="intro-title"><span>Portfolio</span><strong>Tommaso Caputo</strong></div></div>
-      <div class="intro-paper"><svg class="intro-ink" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><rect width="1200" height="900" fill="#dcdbd8"/><polygon class="intro-surface" fill="#050505" points="257,0 257,0 943,900 943,900"/><path class="intro-thread" fill="none" stroke="#080808" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <div class="intro-art"><img src="assets/intro/10.jpg" alt="Composizione originale di Tommaso Caputo"></div><button class="intro-skip">Salta intro</button>`;
-    const siblings=[...document.body.children].filter(el=>el instanceof HTMLElement&&!el.inert);
-    siblings.forEach(el=>el.inert=true);document.body.append(overlay);document.body.classList.add('intro-playing');
-    const skip=overlay.querySelector('button');skip.focus({preventScroll:true});
-    let stopped=false;let frame;const animations=[];
-    function finish(){
-      if(stopped)return;stopped=true;cancelAnimationFrame(frame);animations.forEach(a=>a.cancel());overlay.remove();document.body.classList.remove('intro-playing');
-      siblings.forEach(el=>el.inert=false);document.removeEventListener('keydown',onKey);
-      running=false;try{sessionStorage.setItem(key,'1')}catch{}
-      if(previous instanceof HTMLElement&&previous!==document.body)previous.focus({preventScroll:true});
-      else replay.focus({preventScroll:true});
-    }
-    function onKey(e){if(e.key==='Escape'){e.preventDefault();finish()}if(e.key==='Tab'){e.preventDefault();skip.focus()}}
-    skip.onclick=finish;document.addEventListener('keydown',onKey);
-    const animate=(selector,frames,duration,delay=0,easing='cubic-bezier(.4,0,.2,1)')=>{
-      const animation=overlay.querySelector(selector).animate(frames,{duration,delay,easing,fill:'forwards'});
-      animations.push(animation);return animation;
-    };
-    // Wait for both source images, with an escape path for a slow or failed download.
-    const loaded=Promise.all([...overlay.querySelectorAll('img')].map(img=>img.decode()));
-    let timeout;
-    try{await Promise.race([loaded,new Promise((_,reject)=>{timeout=setTimeout(()=>reject(new Error('Image timeout')),10000)})])}
-    catch{finish();return}finally{clearTimeout(timeout)}
-    if(stopped)return;
-    if(reduced.matches){
-      overlay.querySelector('.intro-paper').remove();overlay.querySelector('.intro-art').remove();
-      overlay.querySelector('.intro-orbit').style.opacity='1';overlay.querySelector('.intro-title').style.opacity='1';
-      setTimeout(finish,1600);return;
-    }
-    // One continuous thread: tangled point → straight line → the artwork's diagonal.
-    // Coordinates use the same 4:3 frame as the untouched photograph.
-    const thread=overlay.querySelector('.intro-thread');
-    const surface=overlay.querySelector('.intro-surface');
-    const ease=t=>{t=Math.max(0,Math.min(1,t));return t*t*(3-2*t)};
-    const origin=performance.now();
-    function draw(now){
-      if(stopped)return;
-      const t=(now-origin)/1000, untie=ease((t-1.5)/1.9), turn=ease((t-3.65)/1.25);
-      const angle=Math.atan2(900,686)*turn;
-      const points=[];
-      for(let i=0;i<=240;i++){
-        const u=i/240;
-        // Irregular superposed loops keep the initial point alive without moving its centre far.
-        const vibration=(1-untie)*Math.sin(t*22+u*31)*1.8;
-        const tangledX=12*Math.sin(u*51+t*.8)+7*Math.sin(u*113-t*.6)+vibration;
-        const tangledY=13*Math.cos(u*67-t*.7)+6*Math.sin(u*139+t)+vibration;
-        const x=tangledX*(1-untie)+(u-.5)*1600*untie;
-        const y=tangledY*(1-untie);
-        points.push(`${i?'L':'M'}${(600+x*Math.cos(angle)-y*Math.sin(angle)).toFixed(2)},${(450+x*Math.sin(angle)+y*Math.cos(angle)).toFixed(2)}`);
-      }
-      thread.setAttribute('d',points.join(' '));
-      const spread=ease((t-4.9)/1.2);
-      surface.setAttribute('points',`${257*(1-spread)},0 257,0 943,900 ${943*(1-spread)},900`);
-      if(t<6.7)frame=requestAnimationFrame(draw);
-    }
-    frame=requestAnimationFrame(draw);
-    animate('.intro-art',[{opacity:0},{opacity:1}],1100,5700);
-    animate('.intro-paper',[{opacity:1},{opacity:0}],500,6800);
-    animate('.intro-art',[{clipPath:'circle(150% at 50% 50%)'},{clipPath:'circle(0% at 50% 50%)'}],1300,7500);
-    animate('.intro-orbit',[{opacity:0},{opacity:1}],900,8100);
-    animate('.intro-disc img',[{transform:'rotate(0deg)'},{transform:'rotate(200deg)'}],6000,8400,'linear');
-    animate('.intro-title',[{opacity:0,transform:'translateY(14px)'},{opacity:1,transform:'translateY(0)'}],1100,9600);
-    animate('.intro-backdrop',[{backdropFilter:'blur(12px)',backgroundColor:'rgba(0,0,0,.64)'},{backdropFilter:'blur(0px)',backgroundColor:'rgba(0,0,0,0)'}],1300,13200);
-    const home=document.querySelector('.scene-svg');
-    if(home)animations.push(home.animate([{filter:'blur(10px)'},{filter:'blur(0px)'}],{duration:1300,delay:13200,fill:'forwards'}));
-    const end=overlay.animate([{opacity:1},{opacity:0}],{duration:900,delay:13600,fill:'forwards'});animations.push(end);
-    end.finished.then(finish).catch(()=>{});
-  }
-  replay.onclick=play;
-  let seen=false;try{seen=sessionStorage.getItem(key)==='1'}catch{}
-  if(!seen&&!reduced.matches)play();
+'use strict';
+const key='davv_intro_c_approved';
+const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+const replay=document.createElement('button');replay.className='intro-replay';replay.textContent='Rivedi intro';document.body.append(replay);
+let running=false;
+async function play(){
+ if(running)return;running=true;
+ const previous=document.activeElement,scene=document.querySelector('.scene-svg');
+ const savedFilter=scene?scene.style.filter:'';
+ const overlay=document.createElement('div');overlay.className='intro-film';overlay.setAttribute('role','dialog');overlay.setAttribute('aria-modal','true');overlay.setAttribute('aria-label','Introduzione al portfolio di Tommaso Caputo');
+ overlay.innerHTML='<div class="intro-backdrop"></div><canvas class="intro-canvas" aria-hidden="true"></canvas><button class="intro-skip">Salta intro</button>';
+ const siblings=[...document.body.children].filter(el=>el instanceof HTMLElement&&!el.inert);
+ siblings.forEach(el=>el.inert=true);document.body.append(overlay);document.body.classList.add('intro-playing');
+ const canvas=overlay.querySelector('canvas'),ctx=canvas.getContext('2d'),backdrop=overlay.querySelector('.intro-backdrop'),skip=overlay.querySelector('button');
+ skip.focus({preventScroll:true});let stopped=false,frame,timer,portrait=false;
+ const W=1280,H=720,images={},paper='#dcdbd8';
+ const clamp=x=>Math.max(0,Math.min(1,x));
+ const smooth=x=>{x=clamp(x);return x*x*x*(x*(x*6-15)+10)};
+ const mix=(a,b,t)=>a+(b-a)*t;
+ function fill(color){ctx.fillStyle=color;ctx.fillRect(0,0,W,H)}
+ function finish(){if(stopped)return;stopped=true;cancelAnimationFrame(frame);clearTimeout(timer);overlay.remove();document.body.classList.remove('intro-playing');if(scene)scene.style.filter=savedFilter;siblings.forEach(el=>el.inert=false);document.removeEventListener('keydown',onKey);running=false;try{sessionStorage.setItem(key,'1')}catch{};(previous instanceof HTMLElement&&previous!==document.body?previous:replay).focus({preventScroll:true})}
+ function onKey(e){if(e.key==='Escape'){e.preventDefault();finish()}else if(e.key==='Tab'){e.preventDefault();skip.focus()}}
+ skip.onclick=finish;document.addEventListener('keydown',onKey);
+function continuousArt(scale=1){
+ const img=images['composizione-continua.png'];
+ ctx.save();ctx.scale(scale,scale);
+ // One square, outpainted texture: its central 16:9 area fills the first shot.
+ // The circle reveals more of this same texture, with no swaps or mirrored joins.
+ ctx.drawImage(img,-640,-640,1280,1280);ctx.restore();
+}
+function original(t){
+ fill(paper);
+ const untie=smooth((t-1.25)/1.8),turn=smooth((t-2.8)/1.55),spread=smooth((t-3.9)/1.6);
+ const angle=Math.atan2(720,429)*turn;
+ ctx.save();ctx.beginPath();ctx.rect(0,0,W,H);ctx.clip();
+ if(spread>0){ctx.beginPath();ctx.moveTo(449-1500*spread,0);ctx.lineTo(449,0);ctx.lineTo(878,720);ctx.lineTo(878-1500*spread,720);ctx.closePath();ctx.fillStyle='#050505';ctx.fill()}
+ ctx.translate(640+23.5*turn,360);ctx.rotate(angle);ctx.beginPath();
+ for(let i=0;i<=420;i++){
+ const u=i/420;
+ // Progressively release folds along the thread, rather than stretching all loops in lockstep.
+ const release=smooth(untie*1.45-u*.45),r=1-release;
+ const phase=t*.6;
+ const x=mix(14*Math.sin(u*83+phase)+6*Math.sin(u*131-phase),(u-.5)*1700,release);
+ const y=r*(13*Math.cos(u*71-phase)+6*Math.sin(u*149+phase)+1.4*Math.sin(t*19+u*35));
+ i?ctx.lineTo(x,y):ctx.moveTo(x,y);
+ }
+ ctx.strokeStyle='#080808';ctx.lineWidth=1.3;ctx.stroke();ctx.restore();
+ // Reveal only the final composition. No intermediate collage, no 10.jpg / Try.png swaps.
+ const reveal=smooth((t-5.05)/1.8);
+ ctx.save();ctx.globalAlpha=reveal;ctx.translate(640,360);continuousArt();ctx.restore();
+}
+function tail(t){
+ const morph=smooth(t/2.15),exit=smooth((t-5.4)/1.5);
+ backdrop.style.opacity=String(1-exit);if(scene)scene.style.filter=`blur(${12*(1-exit)}px)`;
+ const diameter=portrait?1100:540;
+ const cx=640,cy=mix(360,305,morph),w=mix(1280,diameter,morph),h=mix(720,diameter,morph);
+ ctx.save();ctx.globalAlpha=1-exit;ctx.beginPath();ctx.roundRect(cx-w/2,cy-h/2,w,h,diameter/2*morph);ctx.clip();
+ ctx.translate(cx,cy);
+ // Rotation accelerates gently while the corners round; no disappearing iris or image swap.
+ const angle=(Math.max(0,t-.35)-.6*(1-Math.exp(-Math.max(0,t-.35)/.6)))*.47;
+ ctx.rotate(angle*morph);continuousArt(mix(1,.57*diameter/540,morph));ctx.restore();
+ const title=smooth((t-1.65)/1.1)*(1-exit);
+ ctx.save();ctx.globalAlpha=title;ctx.fillStyle='#f6f3ec';ctx.textAlign='center';ctx.shadowColor='#0009';ctx.shadowBlur=20;
+ ctx.font=`${portrait?30:11}px Arial`;ctx.letterSpacing='4px';ctx.fillText('PORTFOLIO',640,portrait?950:612);ctx.letterSpacing='-1.5px';ctx.font=`${portrait?94:52}px Arial`;ctx.fillText('Tommaso Caputo',640,portrait?1060:664);ctx.restore();
+}
+
+ const img=new Image();img.src='assets/intro/composizione-continua.png';
+ try{await Promise.race([img.decode(),new Promise((_,reject)=>{timer=setTimeout(()=>reject(new Error('Image timeout')),15000)})])}catch{finish();return}finally{clearTimeout(timer)}
+ if(stopped)return;images['composizione-continua.png']=img;
+ const start=performance.now();
+ function render(now){
+  if(stopped)return;
+  const t=(now-start)/1000, width=innerWidth,height=innerHeight,dpr=Math.min(devicePixelRatio||1,2);
+  if(canvas.width!==Math.round(width*dpr)||canvas.height!==Math.round(height*dpr)){canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr)}
+  ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,width,height);
+  const scale=Math.min(width/W,height/H);portrait=height>width*1.2;
+  if(t<8&&!reduced.matches){ctx.fillStyle=paper;ctx.fillRect(0,0,width,height)}
+  ctx.translate((width-W*scale)/2,(height-H*scale)/2);ctx.scale(scale,scale);
+  if(reduced.matches){tail(3);if(t>=1.6){finish();return}}
+  else if(t<8)original(t);else if(t<15)tail(t-8);else{finish();return}
+  frame=requestAnimationFrame(render);
+ }
+ frame=requestAnimationFrame(render);
+}
+replay.onclick=play;let seen=false;try{seen=sessionStorage.getItem(key)==='1'}catch{}
+if(!seen&&!reduced.matches)play();
 })();

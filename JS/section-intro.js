@@ -11,7 +11,7 @@
   if(running)return;running=true;
   const previous=document.activeElement,overlay=document.createElement('div');
   overlay.className='section-intro';overlay.setAttribute('role','dialog');overlay.setAttribute('aria-modal','true');overlay.setAttribute('aria-label',section[0]);
-  overlay.innerHTML='<div class="section-intro__type"><span class="section-intro__label"></span><h1 class="section-intro__title"></h1><span class="section-intro__rule" aria-hidden="true"></span></div><button class="section-intro__skip">Salta</button>';
+  overlay.innerHTML='<div class="section-intro__type"><h1 class="section-intro__title"></h1><span class="section-intro__label"></span><span class="section-intro__rule" aria-hidden="true"></span></div><button class="section-intro__skip">Salta</button>';
   overlay.querySelector('.section-intro__label').textContent=section[0];overlay.querySelector('h1').textContent=section[1];
   const siblings=[...document.body.children].filter(el=>!el.inert);
   siblings.forEach(el=>el.inert=true);document.body.append(overlay);

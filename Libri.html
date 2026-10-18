@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="en" style="width:100%;height:100%;margin:0;padding:0;overflow:hidden;">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DAVV - Professional Design Book Collection">
+    <meta name="theme-color" content="#ffffff">
+    <title>Design Books | DAVV Gallery</title>
+    <style>
+      body {
+        animation: fadeIn 0.8s ease-in;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      @keyframes animation_scritta_2_flow_1 {
+            from {
+            opacity: 0;
+            }
+            to {
+              opacity: 1;
+            }
+          }
+          @keyframes animation_scritta_2_flow_2 {
+            from {
+            opacity: 1;
+            }
+            to {
+              opacity: 0;
+            }
+          }  
+      #scritta_2 {
+          animation: animation_scritta_2_flow_1 1.022s linear 0.8s forwards, animation_scritta_2_flow_2 1.022s linear 3.32s forwards;
+        }
+      </style>
+    <link rel="stylesheet" href="CSS/portfolio.css">
+  <script src="JS/portfolio.js" defer></script>
+</head>
+
+  <body data-page="books"
+    style="margin: 0; padding: 0; overflow: hidden; width: 100%; height: 100%;">
+    <div class="svg-container" style="width:100%;height:100%;">
+      <svg class="scene-svg" data-scene="books" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink" style="position:fixed;top:0;left:0;" width="100vw" height="100vh"
+        viewBox="0 0 1920 910" preserveAspectRatio="xMidYMid slice" fill="none">
+        <g id="leftHome_0" clip-path="url(#clip0_1_2)">
+          <rect id="sfondo_1" width="1920" height="910"
+            fill="url(#pattern_0bf38ea06622fc056d4900ef0e75fb645ab9e293)" x="0"
+            y="0" transform="rotate(0 960 455)" />
+          <rect id="scritta_2" opacity="0" width="1920" height="910"
+            fill="url(#pattern_879720b777c90a4319d27093b9c2b514976f88b5)" x="0"
+            y="0" transform="rotate(0 960 455)" />
+          <rect id="scritta_3" opacity="0" width="1920" height="910"
+            fill="url(#pattern2_1_2)" x="0" y="0"
+            transform="rotate(0 960 455)" />
+          <rect id="home_button" tabindex="0" role="button" aria-label="Torna alla pagina iniziale" class="cursor" onclick="window.location.href='./index.html'" x="50" y="50" width="80" height="80" fill="rgba(0, 0, 0, 0.5)" style="border-radius: 10px;"></rect>
+          <text x="90" y="100" font-size="40" fill="white" text-anchor="middle" pointer-events="none">←</text>
+        </g>
+        <defs>
+          <pattern id="pattern_0bf38ea06622fc056d4900ef0e75fb645ab9e293"
+            patternContentUnits="objectBoundingBox" width="1" height="1">
+            <use xlink:href="#image_0bf38ea06622fc056d4900ef0e75fb645ab9e293"
+              transform="scale(0.000520833 0.0010989)" />
+          </pattern>
+          <pattern id="pattern_879720b777c90a4319d27093b9c2b514976f88b5"
+            patternContentUnits="objectBoundingBox" width="1" height="1">
+            <use xlink:href="#image_879720b777c90a4319d27093b9c2b514976f88b5"
+              transform="scale(0.000520833 0.0010989)" />
+          </pattern>
+          <pattern id="pattern2_1_2" patternContentUnits="objectBoundingBox"
+            width="1" height="1">
+            <use xlink:href="#image1_1_2"
+              transform="scale(0.000520833 0.0010989)" />
+          </pattern>
+          <clippath id="clip0_1_2">
+            <rect width="1920" height="910" fill="white" />
+          </clippath>
+          <image id="image_0bf38ea06622fc056d4900ef0e75fb645ab9e293"
+            data-name="5.png" width="1920" height="910"
+            preserveAspectRatio="none"
+            xlink:href="assets/layers/5-060c4c3453.png" />
+          <image id="image_879720b777c90a4319d27093b9c2b514976f88b5"
+            data-name="6.png" width="1920" height="910"
+            preserveAspectRatio="none"
+            xlink:href="assets/layers/6-edec251c87.png" />
+          <clippath id="clip0_1_4">
+            <rect width="1920" height="910" fill="white" />
+          </clippath><pattern id="pattern1_1_2"
+            patternContentUnits="objectBoundingBox" width="1" height="1">
+            <use xlink:href="#image1_1_2"
+              transform="scale(0.000520833 0.0010989)" />
+          </pattern></defs>
+      </svg>
+    </div>
+  
+<nav class="portfolio-nav" aria-label="Navigazione portfolio">
+  <a class="portfolio-nav__brand" href="./index.html" aria-label="Vai alla Home">DAVV<span class="portfolio-nav__dot">.</span></a>
+  <a href="./Tavolo_new.html" data-nav="table">Progetti</a>
+  <a href="./right-Home_0.3.html" data-nav="mirror">Visual</a>
+  <a href="./left-Home_0.2.html" data-nav="library">Libreria</a>
+  <a href="./about_0.2.html" data-nav="about">About</a>
+</nav>
+</body>
+  <script>
+  
+document.addEventListener('DOMContentLoaded', (event) => {
+  const sourceIdNames = ["scritta_2"];
+  
+
+  const candidateElement = document.getElementById("scritta_2")
+  candidateElement.addEventListener("animationend", (event) => {
+    if (event.animationName === "animation_scritta_2_flow_2") {
+
+      sourceIdNames.forEach((id, index) => {
+        const element = document.getElementById(id)
+      
+        const animation = element.style.animation
+      
+        element.style.animation =  'none'
+        setTimeout(() => {
+          element.style.animation = animation
+        }, 5) 
+      })
+    };
+  });
+
+})
+</script>
+</html>

@@ -1,0 +1,39 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.cursor {
+    cursor: pointer;
+    filter: blur(4px);
+    transition: filter 0.3s ease;
+}
+
+.cursor:hover {
+    filter: none;
+}
+
+#Home:hover .cursor:not(:hover) {
+    filter: blur(4px);
+}
+
+.blur {
+    filter: blur(2px);
+}
+
+#focus-circle {
+    position: fixed;
+    pointer-events: none;
+    border-radius: 50%;
+    width: 1000px;
+    /* configurable diameter */
+    height: 500px;
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.8), 0 0 60px 40px rgba(0, 0, 0, 0.9);
+    background: transparent;
+    mix-blend-mode: normal;
+    /* transition: transform 0.1s ease-out; */
+    z-index: 9999;
+}

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DAVV - About Page">
+    <meta name="theme-color" content="#ffffff">
+    <title>About | DAVV Gallery</title>
+    <link rel='icon' type='image/x-icon' href='assets/favicon.svg'>
+    <link rel="stylesheet" href="CSS/style.css" type="text/css">
+    <link rel="stylesheet" href="CSS/carousel.css" type="text/css">
+    <script type="text/javascript" src="JS/carousel.js"></script>
+    <style>
+        body {
+            margin: 0px;
+            animation: fadeIn 0.8s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+  <link rel="stylesheet" href="CSS/portfolio.css">
+  <script src="JS/portfolio.js" defer></script>
+</head>
+
+<body data-page="about">
+
+    <!-- Fade In-Out Intro Animation (embedded) -->
+    <style id="fade-anim-style">
+@keyframes animation_ABOUITSCRITTA__2_flow_1 {
+            from {
+            opacity: 0;
+            }
+            to {
+              opacity: 1;
+            }
+          }
+          @keyframes animation_ABOUITSCRITTA__2_flow_2 {
+            from {
+            opacity: 1;
+            }
+            to {
+              opacity: 0;
+            }
+          }  
+      #ABOUITSCRITTA__2 {
+          animation: animation_ABOUITSCRITTA__2_flow_1 1.022s linear 0.8s forwards, animation_ABOUITSCRITTA__2_flow_2 1.022s linear 3.32s forwards;
+        }
+    </style>
+    <div id="intro-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:9999;pointer-events:none;transition:opacity 0.5s ease;">
+        <svg xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%"
+        viewBox="0 0 1920 910" preserveAspectRatio="xMidYMid slice" fill="none">
+        <g id="leftHome_0" clip-path="url(#clip0_1_2)">
+          <rect id="ABOUT__1" width="100%" height="100%"
+            fill="url(#pattern_e9c33d1d04259701ddf8c256dd880a736dfac125)" x="0"
+            y="0" transform="rotate(0 960 455)" />
+          <rect id="ABOUITSCRITTA__2" opacity="0" width="100%" height="100%"
+            fill="url(#pattern_ed353c29ebb37836d30f228f752b46bdad996285)" x="0"
+            y="0" transform="rotate(0 960 455)" />
+        </g>
+        <defs>
+          <pattern id="pattern_e9c33d1d04259701ddf8c256dd880a736dfac125"
+            patternContentUnits="objectBoundingBox" width="1" height="1">
+            <use xlink:href="#image_e9c33d1d04259701ddf8c256dd880a736dfac125"
+              transform="scale(0.000520833 0.0010989)" />
+          </pattern>
+          <pattern id="pattern_ed353c29ebb37836d30f228f752b46bdad996285"
+            patternContentUnits="objectBoundingBox" width="1" height="1">
+            <use xlink:href="#image_ed353c29ebb37836d30f228f752b46bdad996285"
+              transform="scale(0.000520833 0.0010989)" />
+          </pattern>
+          <clippath id="clip0_1_2">
+            <rect width="100%" height="100%" fill="white" />
+          </clippath>
+          <image id="image_e9c33d1d04259701ddf8c256dd880a736dfac125"
+            data-name="ABOUT.png" width="100%" height="100%"
+            preserveAspectRatio="none"
+            xlink:href="assets/layers/about-ae228c0386.png" />
+          <image id="image_ed353c29ebb37836d30f228f752b46bdad996285"
+            data-name="ABOUIT-SCRITTA.png" width="100%" height="100%"
+            preserveAspectRatio="none"
+            xlink:href="assets/layers/abouit-scritta-ec66402eeb.png" />
+          <clippath id="clip0_1_4">
+            <rect width="100%" height="100%" fill="white" />
+          </clippath></defs>
+      </svg>
+    </div>
+    <script>
+        (function(){
+            var o=document.getElementById('intro-overlay');
+            if(o){
+                if(sessionStorage.getItem('davv_about')){
+                    o.remove();var s=document.getElementById('fade-anim-style');if(s)s.remove();
+                } else {
+                    sessionStorage.setItem('davv_about','1');
+                    setTimeout(function(){
+                        if(o){o.style.opacity='0';setTimeout(function(){o.remove();var s=document.getElementById('fade-anim-style');if(s)s.remove();},500);}
+                    },4400);
+                }
+            }
+        })();
+    </script>
+
+    <head>
+        <meta charset='utf-8'>
+
+    <body style="margin:0;padding:0;overflow:hidden;"><svg class="scene-svg" data-scene="about" style="position:fixed;top:0;left:0;" width="100vw" height="100vh" viewBox="0 0 1920 910" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g id="about" clip-path="url(#clip0_142_8)">
+                <rect id="home" class="blur" x="-25" y="-1161" width="1969" height="3017" fill="url(#pattern0_142_8)"
+                    style="transform: translate(-0.306px, -5.76px);"></rect>
+                <rect id="windows_detail_trigger" tabindex="0" role="button" aria-label="Apri la presentazione" data-carousel-trigger="true" class="cursor" x="814" y="336" width="476" height="392" fill="url(#pattern1_142_8)"
+                    style="transform: translate(-0.204px, -3.84px);"></rect>
+                <rect id="back" tabindex="0" role="button" aria-label="Apri il video" class="cursor" onclick="window.open('https://youtu.be/9-r3pZYxQ_o?si=zZ0gvEOp2pqu431L','_blank')" x="483" y="672" width="587" height="721" fill="url(#pattern2_142_8)"
+                    style="transform: translate(-0.102px, -1.92px);"></rect>
+                <rect id="home_button" tabindex="0" role="button" aria-label="Torna alla pagina iniziale" class="cursor" onclick="window.location.href='./index.html'" x="50" y="50" width="80" height="80" fill="rgba(0, 0, 0, 0.5)" style="border-radius: 10px;"></rect>
+                <text x="90" y="100" font-size="40" fill="white" text-anchor="middle" pointer-events="none">←</text>
+            </g>
+            <defs>
+                <pattern id="pattern0_142_8" patternContentUnits="objectBoundingBox" width="1" height="1">
+                    <use xlink:href="#image0_142_8" transform="scale(0.0004086 0.000266667)"></use>
+                </pattern>
+                <pattern id="pattern1_142_8" patternContentUnits="objectBoundingBox" width="1" height="1">
+                    <use xlink:href="#image1_142_8" transform="matrix(0.00116154 0 0 0.00141044 -0.000622252 0)"></use>
+                </pattern>
+                <pattern id="pattern2_142_8" patternContentUnits="objectBoundingBox" width="1" height="1">
+                    <use xlink:href="#image2_142_8" transform="matrix(0.00107933 0 0 0.000878735 -0.000270207 0)"></use>
+                </pattern>
+                <clipPath id="clip0_142_8">
+                    <rect width="1920" height="910" fill="white"></rect>
+                </clipPath>
+                <image id="image0_142_8" data-name="home.jpg" width="2448" height="3750" preserveAspectRatio="none"
+                    xlink:href="assets/layers/home-3ac07fe403.jpg">
+                </image>
+                <image id="image1_142_8" data-name="pc.png" width="862" height="709" preserveAspectRatio="none"
+                    xlink:href="assets/layers/pc-8e2be286c2.png">
+                </image>
+                <image id="image2_142_8" data-name="back.png" width="927" height="1138" preserveAspectRatio="none"
+                    xlink:href="assets/layers/back-6f409d6c44.png">
+                </image>
+            </defs>
+        </svg>
+        <div class="carousel-container">
+            <div class="carousel-slide">
+                <div class="carousel-item">
+                    <img src="IMG/ABOUT/about.png" alt="about">
+                </div>
+            </div>
+    
+        </div>
+        
+    
+<nav class="portfolio-nav" aria-label="Navigazione portfolio">
+  <a class="portfolio-nav__brand" href="./index.html" aria-label="Vai alla Home">DAVV<span class="portfolio-nav__dot">.</span></a>
+  <a href="./Tavolo_new.html" data-nav="table">Progetti</a>
+  <a href="./right-Home_0.3.html" data-nav="mirror">Visual</a>
+  <a href="./left-Home_0.2.html" data-nav="library">Libreria</a>
+  <a href="./about_0.2.html" data-nav="about">About</a>
+</nav>
+</body>
+
+</html>

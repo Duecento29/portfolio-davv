@@ -1,0 +1,253 @@
+/* Backdrop overlay for carousel */
+        .carousel-backdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .carousel-backdrop.active {
+            display: block;
+        }
+
+        .carousel-container {
+            display: none; /* Hidden by default */
+            position: fixed; /* Use fixed to center it on the viewport */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Center the element */
+            width: 90%;
+            max-width: 1400px;
+            height: 80vh;
+            margin: auto;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            z-index: 1000; /* Ensure it's on top */
+            background: white;
+        }
+
+        .carousel-container.active {
+            display: flex;
+            flex-direction: column;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translate(-50%, -45%);
+                opacity: 0;
+            }
+            to {
+                transform: translate(-50%, -50%);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .carousel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 25px;
+            background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
+            border-bottom: 1px solid #e0e0e0;
+            position: relative;
+            z-index: 1001;
+        }
+
+        .carousel-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .carousel-close {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #666;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-close:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+            color: #000;
+            transform: rotate(90deg);
+        }
+
+        .carousel-slide {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            flex: 1;
+            min-height: 0;
+        }
+
+        .carousel-item {
+            min-width: 100%;
+            flex-shrink: 0;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 80px;
+            overflow-y: auto;
+        }
+
+        .carousel-item img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        /* Scrollbar styling */
+        .carousel-item::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .carousel-item::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .carousel-item::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        .carousel-item::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        /* Arrows — pulled out of flex flow with position:absolute */
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 52px;
+            height: 52px;
+            background: rgba(20, 20, 20, 0.55);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1.5px solid rgba(255, 255, 255, 0.35);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 2001;
+            transition: background 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+        }
+
+        .arrow:hover {
+            background: rgba(0, 0, 0, 0.85);
+            border-color: rgba(255, 255, 255, 0.8);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        /* Hide the freccia.png — use pure CSS chevrons instead */
+        .arrow img {
+            display: none;
+        }
+
+        .prev {
+            left: 18px;
+        }
+
+        .prev::after {
+            content: '';
+            display: block;
+            width: 12px;
+            height: 12px;
+            border-left: 2.5px solid #fff;
+            border-bottom: 2.5px solid #fff;
+            transform: rotate(45deg) translateX(3px);
+        }
+
+        .next {
+            right: 18px;
+        }
+
+        .next::after {
+            content: '';
+            display: block;
+            width: 12px;
+            height: 12px;
+            border-right: 2.5px solid #fff;
+            border-top: 2.5px solid #fff;
+            transform: rotate(45deg) translateX(-3px);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .carousel-container {
+                width: 95%;
+                height: 70vh;
+                max-width: 100%;
+            }
+            
+            .carousel-header {
+                padding: 12px 20px;
+            }
+            
+            .carousel-title {
+                font-size: 14px;
+            }
+            
+            .arrow {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .arrow img {
+                width: 20px;
+                height: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .carousel-container {
+                width: 98%;
+                height: 60vh;
+            }
+            
+            .carousel-header {
+                padding: 10px 15px;
+            }
+            
+            .carousel-title {
+                font-size: 12px;
+                letter-spacing: 0.5px;
+            }
+            
+            .carousel-close {
+                font-size: 24px;
+            }
+            
+            .arrow {
+                width: 35px;
+                height: 35px;
+            }
+        }

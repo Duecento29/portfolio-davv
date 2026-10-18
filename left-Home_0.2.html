@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DAVV - Libreria Book Collection">
+    <meta name="theme-color" content="#ffffff">
+    <title>Libreria | DAVV Gallery</title>
+    <link rel='icon' type='image/x-icon' href='assets/favicon.svg'>
+    <link rel="stylesheet" href="CSS/style.css" type="text/css">
+    <link rel="stylesheet" href="CSS/carousel.css" type="text/css">
+    <script type="text/javascript" src="JS/carousel.js"></script>
+    <style>
+        body {
+            margin: 0px;
+            animation: fadeIn 0.8s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+  <link rel="stylesheet" href="CSS/portfolio.css">
+  <script src="JS/portfolio.js" defer></script>
+</head>
+
+<body data-page="library">
+
+    <!-- Fade In-Out Intro Animation (embedded) -->
+    <style id="fade-anim-style">
+@keyframes animation_scritta_2_flow_1 {
+            from {
+            opacity: 0;
+            }
+            to {
+              opacity: 1;
+            }
+          }
+          @keyframes animation_scritta_2_flow_2 {
+            from {
+            opacity: 1;
+            }
+            to {
+              opacity: 0;
+            }
+          }  
+      #scritta_2 {
+          animation: animation_scritta_2_flow_1 1.022s linear 0.8s forwards, animation_scritta_2_flow_2 1.022s linear 3.32s forwards;
+        }
+    </style>
+    <div id="intro-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:9999;pointer-events:none;transition:opacity 0.5s ease;">
+        <svg xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%"
+        viewBox="0 0 1920 910" preserveAspectRatio="xMidYMid slice" fill="none">
+        <g id="leftHome_0" clip-path="url(#clip0_1_2)">
+          <rect id="sfondo_1" width="100%" height="100%"
+            fill="url(#pattern_0bf38ea06622fc056d4900ef0e75fb645ab9e293)" x="0"
+            y="0" transform="rotate(0 960 455)" />
+          <rect id="scritta_2" opacity="0" width="100%" height="100%"
+            fill="url(#pattern_879720b777c90a4319d27093b9c2b514976f88b5)" x="0"
+            y="0" transform="rotate(0 960 455)" />
+          <rect id="scritta_3" opacity="0" width="100%" height="100%"
+            fill="url(#pattern2_1_2)" x="0" y="0"
+            transform="rotate(0 960 455)" />
+        </g>
+        <defs>
+          <pattern id="pattern_0bf38ea06622fc056d4900ef0e75fb645ab9e293"
+            patternContentUnits="objectBoundingBox" width="1" height="1">
+            <use xlink:href="#image_0bf38ea06622fc056d4900ef0e75fb645ab9e293"
+              transform="scale(0.000520833 0.0010989)" />
+          </pattern>
+          <pattern id="pattern_879720b777c90a4319d27093b9c2b514976f88b5"
+            patternContentUnits="objectBoundingBox" width="1" height="1">
+            <use xlink:href="#image_879720b777c90a4319d27093b9c2b514976f88b5"
+              transform="scale(0.000520833 0.0010989)" />
+          </pattern>
+          <pattern id="pattern2_1_2" patternContentUnits="objectBoundingBox"
+            width="1" height="1">
+            <use xlink:href="#image1_1_2"
+              transform="scale(0.000520833 0.0010989)" />
+          </pattern>
+          <clippath id="clip0_1_2">
+            <rect width="100%" height="100%" fill="white" />
+          </clippath>
+          <image id="image_0bf38ea06622fc056d4900ef0e75fb645ab9e293"
+            data-name="5.png" width="100%" height="100%"
+            preserveAspectRatio="none"
+            xlink:href="assets/layers/5-060c4c3453.png" />
+          <image id="image_879720b777c90a4319d27093b9c2b514976f88b5"
+            data-name="6.png" width="100%" height="100%"
+            preserveAspectRatio="none"
+            xlink:href="assets/layers/6-edec251c87.png" />
+          <clippath id="clip0_1_4">
+            <rect width="100%" height="100%" fill="white" />
+          </clippath><pattern id="pattern1_1_2"
+            patternContentUnits="objectBoundingBox" width="1" height="1">
+            <use xlink:href="#image1_1_2"
+              transform="scale(0.000520833 0.0010989)" />
+          </pattern></defs>
+      </svg>
+    </div>
+    <script>
+        (function(){
+            var o=document.getElementById('intro-overlay');
+            if(o){
+                if(sessionStorage.getItem('davv_left')){
+                    o.remove();var s=document.getElementById('fade-anim-style');if(s)s.remove();
+                } else {
+                    sessionStorage.setItem('davv_left','1');
+                    setTimeout(function(){
+                        if(o){o.style.opacity='0';setTimeout(function(){o.remove();var s=document.getElementById('fade-anim-style');if(s)s.remove();},500);}
+                    },4400);
+                }
+            }
+        })();
+    </script>
+
+    <head>
+        <meta charset='utf-8'>
+
+    <body style="margin:0;padding:0;overflow:hidden;"><svg class="scene-svg" data-scene="library" style="position:fixed;top:0;left:0;" width="100vw" height="100vh" viewBox="0 0 1920 910" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g id="left-Home" clip-path="url(#clip0_43_140)">
+                <rect id="left1" class="blur" x="-152" y="-996" width="2224" height="3407" fill="url(#pattern0_43_140)"
+                    style="transform: translate(-3.234px, -12.4518px); transform-origin: center center;"></rect>
+                <rect id="POL1" class="blur" x="-152" y="475" width="979" height="2020" fill="url(#pattern1_43_140)"
+                    style="transform: translate(-2.156px, -8.30118px); transform-origin: center center;"></rect>
+                <rect id="windows_detail_trigger" tabindex="0" role="button" aria-label="Apri la libreria" data-carousel-trigger="true" class="cursor" x="686" y="-148" width="773" height="1756" fill="url(#pattern2_43_140)"
+                    style="transform: translate(-1.078px, -4.15059px); transform-origin: center center;"></rect>
+                <rect id="home_button" tabindex="0" role="button" aria-label="Torna alla pagina iniziale" class="cursor" onclick="window.location.href='./index.html'" x="50" y="50" width="80" height="80" fill="rgba(0, 0, 0, 0.5)" style="border-radius: 10px;"></rect>
+                <text x="90" y="100" font-size="40" fill="white" text-anchor="middle" pointer-events="none">←</text>
+
+            </g>
+            <defs>
+                <pattern id="pattern0_43_140" patternContentUnits="objectBoundingBox" width="1" height="1">
+                    <use xlink:href="#image0_43_140" transform="scale(0.000408513 0.000266667)"></use>
+                </pattern>
+                <pattern id="pattern1_43_140" patternContentUnits="objectBoundingBox" width="1" height="1">
+                    <use xlink:href="#image1_43_140" transform="scale(0.000884956 0.000428897)"></use>
+                </pattern>
+                <pattern id="pattern2_43_140" patternContentUnits="objectBoundingBox" width="1" height="1">
+                    <use xlink:href="#image2_43_140" transform="scale(0.000880282 0.000387504)"></use>
+                </pattern>
+                <clipPath id="clip0_43_140">
+                    <rect width="1920" height="910" fill="white"></rect>
+                </clipPath>
+               <image id="image0_43_140" data-name="left.jpg" width="2448" height="3750" preserveAspectRatio="none" xlink:href="assets/layers/left-49f8cbbc78.jpg"></image>
+<image id="image1_43_140" data-name="POL.png" width="1130" height="2332" preserveAspectRatio="none" xlink:href="assets/layers/pol-36b2d6fce3.png"></image>
+<image id="image2_43_140" data-name="libri.png" width="1136" height="2581" preserveAspectRatio="none" xlink:href="assets/layers/libri-9884092ac4.png"></image>
+            </defs>
+        </svg>
+        <div class="carousel-container">
+            <div class="carousel-slide">
+                <div class="carousel-item">
+                    <img src="IMG/LIBRERIA/Così parlò Zarathustra.png" alt="Così parlò Zarathustra">
+                </div>
+                <div class="carousel-item">
+                    <img src="IMG/LIBRERIA/Crepuscolo%20degli%20idoli.png" alt="Crepuscolo degli idoli">
+                </div>
+                <div class="carousel-item">
+                    <img src="IMG/LIBRERIA/Fantasia.png" alt="Fantasia">
+                </div>
+                <div class="carousel-item">
+                    <img src="IMG/LIBRERIA/IL%20TAO.png" alt="IL TAO">
+                </div>
+                <div class="carousel-item">
+                    <img src="IMG/LIBRERIA/L_ANTICRISTO.png" alt="L_ANTICRISTO">
+                </div>
+                <div class="carousel-item">
+                    <img src="IMG/LIBRERIA/L_ARTE%20DI%20OTTENERE%20RAGIONE.png" alt="L_ARTE DI OTTENERE RAGIONE">
+                </div>
+                <div class="carousel-item">
+                    <img src="IMG/LIBRERIA/LE%20PORTE%20REGALI.png" alt="LE PORTE REGALI">
+                </div>
+                <div class="carousel-item">
+                    <img src="IMG/LIBRERIA/UBU%20RE.png" alt="UBU RE">
+                </div>
+                <div class="carousel-item">
+                    <img src="IMG/LIBRERIA/Utopia.png" alt="Utopia">
+                </div>
+            </div>
+
+            <div class="arrow prev">
+                <img src="IMG/freccia.png" alt="Previous">
+            </div>
+            <div class="arrow next">
+                <img src="IMG/freccia.png" alt="Next">
+            </div>
+        </div>
+        
+    
+<nav class="portfolio-nav" aria-label="Navigazione portfolio">
+  <a class="portfolio-nav__brand" href="./index.html" aria-label="Vai alla Home">DAVV<span class="portfolio-nav__dot">.</span></a>
+  <a href="./Tavolo_new.html" data-nav="table">Progetti</a>
+  <a href="./right-Home_0.3.html" data-nav="mirror">Visual</a>
+  <a href="./left-Home_0.2.html" data-nav="library">Libreria</a>
+  <a href="./about_0.2.html" data-nav="about">About</a>
+</nav>
+</body>
+</html>

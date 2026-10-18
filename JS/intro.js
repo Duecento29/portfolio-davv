@@ -1,7 +1,7 @@
 /* Approved Test C: one continuous artwork from the surface to the rotating circle. */
 (() => {
 'use strict';
-const key='davv_intro_diagonal_3';
+const key='davv_intro_diagonal_4';
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 const replay=document.createElement('button');replay.className='intro-replay';replay.textContent='Rivedi intro';document.body.append(replay);
 let running=false;
@@ -24,7 +24,7 @@ async function play(){
  function onKey(e){if(e.key==='Escape'){e.preventDefault();finish()}else if(e.key==='Tab'){e.preventDefault();skip.focus()}}
  skip.onclick=finish;document.addEventListener('keydown',onKey);
 function continuousArt(scale=1){
- const img=images['composizione-raccordo-interno.png'];
+ const img=images['composizione-sfondo-allineato.png'];
  ctx.save();ctx.scale(scale,scale);
  // One square texture, cropped to a 4:3 stage and then the rotating circle.
  // The circle reveals more of this same texture, with no swaps or mirrored joins.
@@ -34,10 +34,10 @@ function original(t){
  ctx.save();ctx.beginPath();ctx.rect(0,0,W,H);ctx.clip();
  fill(paper);
  const untie=smooth((t-1.25)/1.8),turn=smooth((t-2.8)/1.55),spread=smooth((t-3.9)/1.6);
- const angle=Math.atan2(960,572)*turn;
+ const angle=Math.atan2(960,546)*turn;
  ctx.save();ctx.beginPath();ctx.rect(0,0,W,H);ctx.clip();
- if(spread>0){ctx.beginPath();ctx.moveTo(377.5-1500*spread,0);ctx.lineTo(377.5,0);ctx.lineTo(949.5,960);ctx.lineTo(949.5-1500*spread,960);ctx.closePath();ctx.fillStyle='#050505';ctx.fill()}
- ctx.translate(640+23.5*turn,480);ctx.rotate(angle);ctx.beginPath();
+ if(spread>0){ctx.beginPath();ctx.moveTo(374-1500*spread,0);ctx.lineTo(374,0);ctx.lineTo(920,960);ctx.lineTo(920-1500*spread,960);ctx.closePath();ctx.fillStyle='#050505';ctx.fill()}
+ ctx.translate(640+7*turn,480);ctx.rotate(angle);ctx.beginPath();
  for(let i=0;i<=420;i++){
  const u=i/420;
  // Progressively release folds along the thread, rather than stretching all loops in lockstep.
@@ -68,9 +68,9 @@ function tail(t){
  ctx.font=`${portrait?30:18}px Arial`;ctx.letterSpacing='4px';ctx.fillText('PORTFOLIO',640,920);ctx.letterSpacing='-1.5px';ctx.font=`${portrait?94:74}px Arial`;ctx.fillText('Tommaso Caputo',640,portrait?1040:1000);ctx.restore();
 }
 
- const img=new Image();img.src='assets/intro/composizione-raccordo-interno.png';
+ const img=new Image();img.src='assets/intro/composizione-sfondo-allineato.png';
  try{await Promise.race([img.decode(),new Promise((_,reject)=>{timer=setTimeout(()=>reject(new Error('Image timeout')),15000)})])}catch{finish();return}finally{clearTimeout(timer)}
- if(stopped)return;images['composizione-raccordo-interno.png']=img;
+ if(stopped)return;images['composizione-sfondo-allineato.png']=img;
  const start=performance.now();
  function render(now){
   if(stopped)return;

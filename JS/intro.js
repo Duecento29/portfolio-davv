@@ -1,7 +1,7 @@
 /* Approved Test C: one continuous artwork from the surface to the rotating circle. */
 (() => {
 'use strict';
-const key='davv_intro_framed_4_3';
+const key='davv_intro_diagonal_2';
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 const replay=document.createElement('button');replay.className='intro-replay';replay.textContent='Rivedi intro';document.body.append(replay);
 let running=false;
@@ -24,7 +24,7 @@ async function play(){
  function onKey(e){if(e.key==='Escape'){e.preventDefault();finish()}else if(e.key==='Tab'){e.preventDefault();skip.focus()}}
  skip.onclick=finish;document.addEventListener('keydown',onKey);
 function continuousArt(scale=1){
- const img=images['composizione-continua.png'];
+ const img=images['composizione-diagonale-corretta.png'];
  ctx.save();ctx.scale(scale,scale);
  // One square texture, cropped to a 4:3 stage and then the rotating circle.
  // The circle reveals more of this same texture, with no swaps or mirrored joins.
@@ -68,9 +68,9 @@ function tail(t){
  ctx.font=`${portrait?30:18}px Arial`;ctx.letterSpacing='4px';ctx.fillText('PORTFOLIO',640,920);ctx.letterSpacing='-1.5px';ctx.font=`${portrait?94:74}px Arial`;ctx.fillText('Tommaso Caputo',640,portrait?1040:1000);ctx.restore();
 }
 
- const img=new Image();img.src='assets/intro/composizione-continua.png';
+ const img=new Image();img.src='assets/intro/composizione-diagonale-corretta.png';
  try{await Promise.race([img.decode(),new Promise((_,reject)=>{timer=setTimeout(()=>reject(new Error('Image timeout')),15000)})])}catch{finish();return}finally{clearTimeout(timer)}
- if(stopped)return;images['composizione-continua.png']=img;
+ if(stopped)return;images['composizione-diagonale-corretta.png']=img;
  const start=performance.now();
  function render(now){
   if(stopped)return;

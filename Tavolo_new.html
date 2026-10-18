@@ -17,69 +17,10 @@
     </style>
   <link rel="stylesheet" href="CSS/portfolio.css?v=labels-2">
   <script src="JS/portfolio.js?v=labels-2" defer></script>
+  <link rel="stylesheet" href="CSS/section-intro.css?v=1">
+  <script src="JS/section-intro.js?v=1" defer></script>
 </head>
 <body data-page="table">
-    <!-- Fade In-Out Intro Animation (embedded) -->
-    <style id="fade-anim-style">
-@keyframes animation_TAVLOSCRITTA__2_flow_1 {
-            from {
-            opacity: 0;
-            }
-            to {
-              opacity: 1;
-            }
-          }
-          @keyframes animation_TAVLOSCRITTA__2_flow_2 {
-            from {
-            opacity: 1;
-            }
-            to {
-              opacity: 0;
-            }
-          }  
-      #TAVLOSCRITTA__2 {
-          animation: animation_TAVLOSCRITTA__2_flow_1 1.022s linear 0.8s forwards, animation_TAVLOSCRITTA__2_flow_2 1.022s linear 3.32s forwards;
-        }
-    </style>
-    <div id="intro-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:9999;pointer-events:none;transition:opacity 0.5s ease;">
-<svg xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" preserveAspectRatio="xMidYMid slice"
-        viewBox="0 0 1920 910" fill="none">
-        <g id="leftHome_0" clip-path="url(#clip0_1_2)">
-          <rect id="TAVOLO__1" width="100%" height="100%" preserveAspectRatio="xMidYMid slice"
-            fill="url(#pattern_735c78e2d3a65f3c99ce9957d65bdd4ada585358)" x="0"
-            y="0" transform="rotate(0 960 455)" />
-          <rect id="TAVLOSCRITTA__2" opacity="0" width="100%" height="100%" preserveAspectRatio="xMidYMid slice"
-            fill="url(#pattern_a28e357c5a7d6f8b853bc9c97b2b22117728d76c)" x="0"
-            y="0" transform="rotate(0 960 455)" />
-        </g>
-        <defs>
-          <pattern id="pattern_735c78e2d3a65f3c99ce9957d65bdd4ada585358"
-            patternContentUnits="objectBoundingBox" width="1" height="1">
-            <use xlink:href="#image_735c78e2d3a65f3c99ce9957d65bdd4ada585358"
-              transform="scale(0.000520833 0.0010989)" />
-          </pattern>
-          <pattern id="pattern_a28e357c5a7d6f8b853bc9c97b2b22117728d76c"
-            patternContentUnits="objectBoundingBox" width="1" height="1">
-            <use xlink:href="#image_a28e357c5a7d6f8b853bc9c97b2b22117728d76c"
-              transform="scale(0.000520833 0.0010989)" />
-          </pattern>
-          <clippath id="clip0_1_2">
-            <rect width="100%" height="100%" preserveAspectRatio="xMidYMid slice" fill="white" />
-          </clippath>
-          <image id="image_735c78e2d3a65f3c99ce9957d65bdd4ada585358"
-            data-name="TAVOLO.png" width="100%" height="100%" preserveAspectRatio="xMidYMid slice"
-            preserveAspectRatio="none"
-            xlink:href="assets/layers/tavolo-7f3adabb08.png" />
-          <image id="image_a28e357c5a7d6f8b853bc9c97b2b22117728d76c"
-            data-name="TAVLO-SCRITTA.png" width="100%" height="100%" preserveAspectRatio="xMidYMid slice"
-            preserveAspectRatio="none"
-            xlink:href="assets/layers/tavlo-scritta-ff8793373b.png" />
-          <clippath id="clip0_1_4">
-            <rect width="100%" height="100%" preserveAspectRatio="xMidYMid slice" fill="white" />
-          </clippath></defs>
-      </svg>
-    </div>
     <!-- Main Parallax Scene -->
 <svg class="scene-svg" data-scene="table" id="main-svg" style="position:fixed;top:0;left:0;" width="100vw" height="100vh" viewBox="0 0 1920 910" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="about" clip-path="url(#clip0_143_52)">
@@ -125,21 +66,7 @@
     function openProjCarousel() {
         if (window.openCarousel) window.openCarousel();
     }
-    // Remove overlay after animation (~4.4s) — only on first visit
-    (function(){
-        var overlay=document.getElementById('intro-overlay');
-        if(overlay){
-            if(sessionStorage.getItem('davv_tavolo')){
-                overlay.style.display='none';
-            } else {
-                sessionStorage.setItem('davv_tavolo','1');
-                setTimeout(function(){
-                    var ov=document.getElementById('intro-overlay');
-                    if(ov)ov.style.display='none';
-                },4400);
-            }
-        }
-    })();
+
 
     </script>
 

@@ -28,86 +28,11 @@
     </style>
   <link rel="stylesheet" href="CSS/portfolio.css?v=labels-2">
   <script src="JS/portfolio.js?v=labels-2" defer></script>
+  <link rel="stylesheet" href="CSS/section-intro.css?v=1">
+  <script src="JS/section-intro.js?v=1" defer></script>
 </head>
 
 <body data-page="mirror">
-
-    <!-- Fade In-Out Intro Animation (embedded) -->
-    <style id="fade-anim-style">
-@keyframes animation_overL_2_flow_1 {
-            from {
-            opacity: 0;
-            }
-            to {
-              opacity: 1;
-            }
-          }
-          @keyframes animation_overL_2_flow_2 {
-            from {
-            opacity: 1;
-            }
-            to {
-              opacity: 0;
-            }
-          }  
-      #overL_2 {
-          animation: animation_overL_2_flow_1 1.022s linear 0.8s forwards, animation_overL_2_flow_2 1.022s linear 3.32s forwards;
-        }
-    </style>
-    <div id="intro-overlay" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:9999;pointer-events:none;transition:opacity 0.5s ease;">
-        <svg xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%"
-        viewBox="0 0 1920 910" preserveAspectRatio="xMidYMid slice" fill="none">
-        <g id="leftHome_0" clip-path="url(#clip0_1_2)">
-          <rect id="sfondo_1" width="100%" height="100%"
-            fill="url(#pattern_f65287fd2582d08f0233159658747b94585019c9)" x="0"
-            y="0" transform="rotate(0 960 455)" />
-          <rect id="overL_2" opacity="0" width="100%" height="100%"
-            fill="url(#pattern_52d2da5f3dc87cd9d9e9d6d988cfc777ed0fea96)" x="0"
-            y="0" transform="rotate(0 960 455)" />
-        </g>
-        <defs>
-          <pattern id="pattern_f65287fd2582d08f0233159658747b94585019c9"
-            patternContentUnits="objectBoundingBox" width="1" height="1">
-            <use xlink:href="#image_f65287fd2582d08f0233159658747b94585019c9"
-              transform="scale(0.000520833 0.0010989)" />
-          </pattern>
-          <pattern id="pattern_52d2da5f3dc87cd9d9e9d6d988cfc777ed0fea96"
-            patternContentUnits="objectBoundingBox" width="1" height="1">
-            <use xlink:href="#image_52d2da5f3dc87cd9d9e9d6d988cfc777ed0fea96"
-              transform="scale(0.000520833 0.0010989)" />
-          </pattern>
-          <clippath id="clip0_1_2">
-            <rect width="100%" height="100%" fill="white" />
-          </clippath>
-          <image id="image_f65287fd2582d08f0233159658747b94585019c9"
-            data-name="01.jpg" width="100%" height="100%"
-            preserveAspectRatio="none"
-            xlink:href="assets/layers/01-a4f6cf14cb.jpg" />
-          <image id="image_52d2da5f3dc87cd9d9e9d6d988cfc777ed0fea96"
-            data-name="02.png" width="100%" height="100%"
-            preserveAspectRatio="none"
-            xlink:href="assets/layers/02-1d8ae5187c.png" />
-          <clippath id="clip0_1_4">
-            <rect width="100%" height="100%" fill="white" />
-          </clippath></defs>
-      </svg>
-    </div>
-    <script>
-        (function(){
-            var o=document.getElementById('intro-overlay');
-            if(o){
-                if(sessionStorage.getItem('davv_right')){
-                    o.remove();var s=document.getElementById('fade-anim-style');if(s)s.remove();
-                } else {
-                    sessionStorage.setItem('davv_right','1');
-                    setTimeout(function(){
-                        if(o){o.style.opacity='0';setTimeout(function(){o.remove();var s=document.getElementById('fade-anim-style');if(s)s.remove();},500);}
-                    },4400);
-                }
-            }
-        })();
-    </script>
 
     <head>
         <meta charset='utf-8'>

@@ -137,9 +137,14 @@
                 <clipPath id="clip0_142_8">
                     <rect width="1920" height="910" fill="white"></rect>
                 </clipPath>
-                <image id="image0_142_8" data-name="home.jpg" width="2448" height="3750" preserveAspectRatio="none"
+                <filter id="image0_142_8-repair-feather" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="60"/></filter>
+                <mask id="image0_142_8-repair-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="2448" height="3750" style="mask-type:luminance"><polygon points="560,2630 1060,2480 1450,2470 1800,2600 1800,3040 500,3100" fill="white" filter="url(#image0_142_8-repair-feather)"/></mask>
+                <g id="image0_142_8">
+                  <image id="image0_142_8-original" data-name="home.jpg" width="2448" height="3750" preserveAspectRatio="none"
                     xlink:href="assets/layers/home-3ac07fe403.jpg">
                 </image>
+                  <image width="2448" height="3750" preserveAspectRatio="none" xlink:href="assets/layers/about-background-repair.png" mask="url(#image0_142_8-repair-mask)"/>
+                </g>
                 <image id="image1_142_8" data-name="pc.png" width="862" height="709" preserveAspectRatio="none"
                     xlink:href="assets/layers/pc-8e2be286c2.png">
                 </image>

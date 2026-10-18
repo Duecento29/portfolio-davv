@@ -216,9 +216,14 @@
                 <clipPath id="clip0_43_8">
                     <rect width="1920" height="910" fill="white"></rect>
                 </clipPath>
-                <image id="image0_43_8" data-name="home.jpg" width="2448" height="3750" preserveAspectRatio="none"
+                <filter id="image0_43_8-repair-feather" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="60"/></filter>
+                <mask id="image0_43_8-repair-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="2448" height="3750" style="mask-type:luminance"><polygon points="0,1800 1000,1800 1060,2020 1740,2110 1740,2240 2448,2300 2448,2950 0,2950" fill="white" filter="url(#image0_43_8-repair-feather)"/></mask>
+                <g id="image0_43_8">
+                  <image id="image0_43_8-original" data-name="home.jpg" width="2448" height="3750" preserveAspectRatio="none"
                     xlink:href="assets/layers/home-c62ef03b24.jpg">
                 </image>
+                  <image width="2448" height="3750" preserveAspectRatio="none" xlink:href="assets/layers/home-background-repair.png" mask="url(#image0_43_8-repair-mask)"/>
+                </g>
                 <image id="image1_43_8" data-name="tavolo.png" width="1691" height="1043" preserveAspectRatio="none"
                     xlink:href="assets/layers/tavolo-1f9192e835.png">
                 </image>
@@ -229,7 +234,7 @@
                     xlink:href="assets/layers/libreria3-cfd0c9c011.png">
                 </image>
                 <image id="image4_43_8" data-name="sedia.png" width="1293" height="1425" preserveAspectRatio="none"
-                    xlink:href="assets/layers/sedia-ce6023a5aa.png">
+                    xlink:href="assets/layers/home-chair-clean.png">
                 </image>
             </defs>
         </svg>

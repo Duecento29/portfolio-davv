@@ -150,8 +150,13 @@
                 <clipPath id="clip0_43_140">
                     <rect width="1920" height="910" fill="white"></rect>
                 </clipPath>
-               <image id="image0_43_140" data-name="left.jpg" width="2448" height="3750" preserveAspectRatio="none" xlink:href="assets/layers/left-49f8cbbc78.jpg"></image>
-<image id="image1_43_140" data-name="POL.png" width="1130" height="2332" preserveAspectRatio="none" xlink:href="assets/layers/pol-36b2d6fce3.png"></image>
+               <filter id="image0_43_140-repair-feather" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="60"/></filter>
+                <mask id="image0_43_140-repair-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="2448" height="3750" style="mask-type:luminance"><polygon points="0,1500 1560,1500 1560,2830 1640,2990 2448,3050 2448,3400 0,3400" fill="white" filter="url(#image0_43_140-repair-feather)"/></mask>
+                <g id="image0_43_140">
+                  <image id="image0_43_140-original" data-name="left.jpg" width="2448" height="3750" preserveAspectRatio="none" xlink:href="assets/layers/left-49f8cbbc78.jpg"></image>
+                  <image width="2448" height="3750" preserveAspectRatio="none" xlink:href="assets/layers/library-background-repair.png" mask="url(#image0_43_140-repair-mask)"/>
+                </g>
+<image id="image1_43_140" data-name="POL.png" width="1130" height="2332" preserveAspectRatio="none" xlink:href="assets/layers/library-chair-clean.png"></image>
 <image id="image2_43_140" data-name="libri.png" width="1136" height="2581" preserveAspectRatio="none" xlink:href="assets/layers/libri-9884092ac4.png"></image>
             </defs>
         </svg>

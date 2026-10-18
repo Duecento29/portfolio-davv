@@ -52,8 +52,8 @@
       if (settled) {paintX=mouseX;paintY=mouseY;}
       for (const {element,depth,base} of layers) {
         // Foreground objects move more than the distant room, in viewBox units.
-        const x=(-paintX*64*depth).toFixed(2);
-        const y=(-paintY*36*depth).toFixed(2);
+        const x=(-paintX*22*depth).toFixed(2);
+        const y=(-paintY*12*depth).toFixed(2);
         element.setAttribute('transform', `translate(${x} ${y}) ${base}`.trim());
       }
       if (!settled) frame=requestAnimationFrame(apply);

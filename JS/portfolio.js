@@ -100,6 +100,7 @@
       element.addEventListener('blur',hideHint);
     });
     const depths = layerDepths[page] || {};
+    const motionScale = (page==='home' || page==='about') ? .8 : .95;
     const layers = Object.entries(depths).map(([id,depth]) => {
       const element = svg.querySelector(`[id="${id}"]`);
       if (!element) return null;
@@ -126,8 +127,8 @@
       if (settled) {paintX=mouseX;paintY=mouseY;}
       for (const {element,depth,base} of layers) {
         // Foreground objects move more than the distant room, in viewBox units.
-        const x=(-paintX*22*depth).toFixed(2);
-        const y=(-paintY*12*depth).toFixed(2);
+        const x=(-paintX*22*depth*motionScale).toFixed(2);
+        const y=(-paintY*12*depth*motionScale).toFixed(2);
         element.setAttribute('transform', `translate(${x} ${y}) ${base}`.trim());
       }
       if (!settled) frame=requestAnimationFrame(apply);

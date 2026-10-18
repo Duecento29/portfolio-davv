@@ -1,0 +1,7 @@
+.about-cv{display:flex;align-items:center;justify-content:center;gap:12px;flex-shrink:0;padding:15px 24px;border-top:1px solid #e8e6e0;background:#f7f6f2;color:#242424;font-family:Arial,sans-serif}
+.about-cv__label{font-size:13px;font-weight:600;margin-right:8px}
+.about-cv a{display:inline-flex;align-items:center;gap:20px;border:1px solid #36352e;border-radius:24px;padding:11px 19px;color:#242424;text-decoration:none;font-size:13px;line-height:1.2;transition:background .2s,color .2s}
+.about-cv a:hover{background:#242424;color:#fff}
+.about-cv a:focus-visible{outline:2px solid #b99c33;outline-offset:3px}
+.about-cv__format{font-size:10px;letter-spacing:.1em;color:#666}
+@media(max-width:540px){.about-cv{gap:10px;flex-wrap:wrap;padding:13px 16px}.about-cv__label{width:100%;text-align:center;margin:0}.about-cv a{padding:11px 16px}.about-cv__format{display:none}}

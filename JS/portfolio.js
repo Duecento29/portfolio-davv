@@ -18,6 +18,29 @@
     for (const a of document.querySelectorAll('.portfolio-nav [data-nav]')) {
       if (a.dataset.nav === page) a.setAttribute('aria-current','page');
     }
+    // Keep the complete photograph but give each Home object a separate hit silhouette.
+    // The wrapper moves artwork and interaction geometry together during parallax.
+    if(page==='home' && window.DAVV_HOME_HIT_AREAS){
+      const ns='http://www.w3.org/2000/svg';
+      for(const [id,d] of Object.entries(window.DAVV_HOME_HIT_AREAS)){
+        const art=document.querySelector(`.scene-svg [id="${id}"]`);
+        if(!art)continue;
+        const group=document.createElementNS(ns,'g');
+        for(const name of ['id','class','tabindex','role','aria-label','onclick']){
+          if(art.hasAttribute(name)){group.setAttribute(name,art.getAttribute(name));art.removeAttribute(name);}
+        }
+        art.setAttribute('data-artwork',id);
+        art.style.pointerEvents='none';
+        art.style.removeProperty('transform');
+        const hit=document.createElementNS(ns,'path');
+        hit.setAttribute('d',d);
+        hit.setAttribute('transform',`translate(${art.getAttribute('x')} ${art.getAttribute('y')}) scale(${art.getAttribute('width')} ${art.getAttribute('height')})`);
+        hit.setAttribute('fill','transparent');
+        hit.style.pointerEvents='fill';
+        hit.setAttribute('aria-hidden','true');
+        art.replaceWith(group);group.append(art,hit);
+      }
+    }
     // SVG's onclick works with a mouse by default, but not with the keyboard.
     document.querySelectorAll('.scene-svg [tabindex="0"]').forEach(el => {
       el.addEventListener('keydown', e => {

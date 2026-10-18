@@ -12,9 +12,9 @@ svg.scene-svg {
   touch-action:pan-y;
 }
 /* Blur individual photographic layers, so the hovered object alone can sharpen. */
-.scene-svg .scene-layer { filter:blur(.65px); transition:filter .24s ease; }
+.scene-svg .scene-layer { filter:blur(1.2px); transition:filter .24s ease; }
 .scene-svg .cursor { cursor:pointer; -webkit-tap-highlight-color:transparent; }
-#Home:hover .cursor.scene-layer:not(:hover) { filter:blur(.65px); }
+#Home:hover .cursor.scene-layer:not(:hover) { filter:blur(1.2px); }
 .scene-svg .cursor.scene-layer:hover,
 .scene-svg .cursor.scene-layer:focus-visible,
 #Home:hover .cursor.scene-layer:focus-visible { filter:blur(0); }

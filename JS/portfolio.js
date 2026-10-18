@@ -26,10 +26,61 @@
     });
     const svg = document.querySelector('svg.scene-svg');
     if (!svg) return;
+    const destinations = {
+      home:{tavolo1:'Progetti',windows_detail_trigger:'Visual',libreria31:'Libreria',sedia1:'About'},
+      table:{PROGETTO1:'Progetti'},
+      mirror:{windows_detail_trigger:'Visual'},
+      library:{windows_detail_trigger:'Libri'},
+      about:{windows_detail_trigger:'About',back:'Video'}
+    };
+    const hint=document.createElement('div');
+    hint.className='scene-hint';
+    hint.setAttribute('aria-hidden','true'); // Buttons already have descriptive accessible names.
+    document.body.appendChild(hint);
+    let keyboardMode=false;
+    const hideHint=()=>hint.classList.remove('is-visible');
+    const positionHint=(x,y)=>{
+      const width=hint.offsetWidth,height=hint.offsetHeight,gap=16,margin=12;
+      const left=x+gap+width>window.innerWidth-margin ? x-width-gap : x+gap;
+      const top=y+gap+height>window.innerHeight-margin ? y-height-gap : y+gap;
+      hint.style.left=Math.max(margin,Math.min(left,window.innerWidth-width-margin))+'px';
+      hint.style.top=Math.max(margin,Math.min(top,window.innerHeight-height-margin))+'px';
+    };
+    document.addEventListener('keydown',event=>{
+      if(event.key==='Tab')keyboardMode=true;
+      if(event.key==='Escape')hideHint();
+    });
+    document.addEventListener('pointerdown',()=>{keyboardMode=false;hideHint();},{passive:true});
+    window.addEventListener('blur',hideHint);
+    window.addEventListener('resize',hideHint);
+    svg.querySelectorAll('.cursor[tabindex="0"]').forEach(element=>{
+      const label=element.id==='home_button' ? 'Home' : destinations[page]?.[element.id];
+      if(!label)return;
+      element.addEventListener('pointerenter',event=>{
+        if(event.pointerType==='touch')return;
+        hint.textContent=label;positionHint(event.clientX,event.clientY);
+        hint.classList.add('is-visible');
+      });
+      element.addEventListener('pointermove',event=>{
+        if(event.pointerType!=='touch')positionHint(event.clientX,event.clientY);
+      });
+      element.addEventListener('pointerleave',hideHint);
+      element.addEventListener('click',hideHint);
+      element.addEventListener('focus',()=>{
+        if(!keyboardMode)return;
+        const bounds=element.getBoundingClientRect();
+        hint.textContent=label;
+        positionHint(Math.max(12,Math.min(bounds.right,window.innerWidth-100)),
+          Math.max(12,Math.min(bounds.top+bounds.height/2,window.innerHeight-70)));
+        hint.classList.add('is-visible');
+      });
+      element.addEventListener('blur',hideHint);
+    });
     const depths = layerDepths[page] || {};
     const layers = Object.entries(depths).map(([id,depth]) => {
       const element = svg.querySelector(`[id="${id}"]`);
       if (!element) return null;
+      element.classList.add('scene-layer');
       // Exported CSS translations override the SVG transform attribute entirely.
       // Discard those frozen pointer offsets, preserving the authored SVG rotation.
       element.style.removeProperty('transform');

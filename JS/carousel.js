@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    if(window.DAVV_MOBILE)return;
     const carouselContainer = document.querySelector('.carousel-container');
     const carouselSlide = document.querySelector('.carousel-slide');
     const carouselItems = document.querySelectorAll('.carousel-item');

@@ -13,6 +13,7 @@
   };
 
   document.addEventListener('DOMContentLoaded', () => {
+    if(window.DAVV_MOBILE)return;
     const page = document.body.dataset.page || 'home';
     document.documentElement.lang='it';
     for (const a of document.querySelectorAll('.portfolio-nav [data-nav]')) {

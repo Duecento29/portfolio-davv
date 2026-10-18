@@ -1,6 +1,7 @@
 /* Approved Test C: one continuous artwork from the surface to the rotating circle. */
 (() => {
 'use strict';
+ if(window.DAVV_MOBILE)return;
 const key='davv_intro_diagonal_4';
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 const replay=document.createElement('button');replay.className='intro-replay';replay.textContent='Rivedi intro';document.body.append(replay);

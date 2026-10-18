@@ -1,6 +1,7 @@
 /* Section titles share the opening film's typography and reveal the live room. */
 (() => {
  'use strict';
+ if(window.DAVV_MOBILE)return;
  const sections={library:['Libreria','Liber–Libri'],mirror:['Visual','Liber–Libera'],table:['Progetti','Liber–Liberorum'],about:['About','Turi']};
  const page=document.body.dataset.page,section=sections[page];
  if(!section)return;

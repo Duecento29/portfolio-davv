@@ -11,7 +11,6 @@
     about:   {home:.10, windows_detail_trigger:.54, back:.74},
     books:   {}
   };
-  const labels = {home:'Home', table:'Progetti', mirror:'Visual', library:'Libreria', about:'About', books:'Libri'};
 
   document.addEventListener('DOMContentLoaded', () => {
     const page = document.body.dataset.page || 'home';
@@ -30,35 +29,60 @@
     const depths = layerDepths[page] || {};
     const layers = Object.entries(depths).map(([id,depth]) => {
       const element = svg.querySelector(`[id="${id}"]`);
-      return element ? {element,depth,base:element.getAttribute('transform')||''} : null;
+      if (!element) return null;
+      // Exported CSS translations override the SVG transform attribute entirely.
+      // Discard those frozen pointer offsets, preserving the authored SVG rotation.
+      element.style.removeProperty('transform');
+      element.style.removeProperty('transform-origin');
+      return {element,depth,base:element.getAttribute('transform')||''};
     }).filter(Boolean);
     if (!layers.length) return;
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const smallTouch = window.matchMedia('(pointer: coarse)');
-    let mouseX=0,mouseY=0,paintX=0,paintY=0,frame=0;
-    const apply = () => {
+    let mouseX=0,mouseY=0,paintX=0,paintY=0,frame=0,lastTime=0;
+    const apply = (time) => {
       frame=0;
-      // Subtle physical offsets, expressed in SVG viewBox coordinates (1920 x 910).
-      paintX += (mouseX-paintX)*.15;
-      paintY += (mouseY-paintY)*.15;
+      // Time-based easing gives the same weight on 60 Hz and high-refresh screens.
+      const elapsed=lastTime ? Math.min(time-lastTime,50) : 16.67;
+      lastTime=time;
+      const ease=1-Math.exp(-elapsed/110);
+      paintX += (mouseX-paintX)*ease;
+      paintY += (mouseY-paintY)*ease;
+      const settled=Math.abs(mouseX-paintX)<.001 && Math.abs(mouseY-paintY)<.001;
+      if (settled) {paintX=mouseX;paintY=mouseY;}
       for (const {element,depth,base} of layers) {
-        const x=(paintX*26*depth).toFixed(2);
-        const y=(paintY*17*depth).toFixed(2);
+        // Foreground objects move more than the distant room, in viewBox units.
+        const x=(-paintX*64*depth).toFixed(2);
+        const y=(-paintY*36*depth).toFixed(2);
         element.setAttribute('transform', `translate(${x} ${y}) ${base}`.trim());
       }
-      if (Math.abs(mouseX-paintX)>.002 || Math.abs(mouseY-paintY)>.002) frame=requestAnimationFrame(apply);
+      if (!settled) frame=requestAnimationFrame(apply);
+      else lastTime=0;
     };
     const move = (event) => {
-      if (reduceMotion.matches || smallTouch.matches) return;
-      mouseX=(event.clientX/window.innerWidth-.5)*2;
-      mouseY=(event.clientY/window.innerHeight-.5)*2;
+      if (reduceMotion.matches || (event.pointerType==='touch' && !event.buttons)) return;
+      mouseX=Math.max(-1,Math.min(1,(event.clientX/window.innerWidth-.5)*2));
+      mouseY=Math.max(-1,Math.min(1,(event.clientY/window.innerHeight-.5)*2));
+      if (!frame) frame=requestAnimationFrame(apply);
+    };
+    const reset = () => {
+      mouseX=0;mouseY=0;
       if (!frame) frame=requestAnimationFrame(apply);
     };
     window.addEventListener('pointermove',move,{passive:true});
-    window.addEventListener('blur',() => {mouseX=0;mouseY=0;if(!frame)frame=requestAnimationFrame(apply);});
-    // Depth layers never change layout or raster alignment; no device tilt is required.
-    if (reduceMotion.matches || smallTouch.matches) return;
-    apply();
+    document.documentElement.addEventListener('pointerleave',reset);
+    window.addEventListener('blur',reset);
+    window.addEventListener('pointerup',event => {if(event.pointerType==='touch')reset();});
+    window.addEventListener('pointercancel',reset);
+    document.addEventListener('visibilitychange',() => {if(document.hidden)reset();});
+    reduceMotion.addEventListener('change',() => {
+      if (frame) cancelAnimationFrame(frame);
+      frame=0;lastTime=0;mouseX=0;mouseY=0;paintX=0;paintY=0;
+      for (const {element,base} of layers) {
+        if (base) element.setAttribute('transform',base);
+        else element.removeAttribute('transform');
+      }
+    });
+    // Touch drags also work; reduced-motion users retain a completely still scene.
   });
 })();

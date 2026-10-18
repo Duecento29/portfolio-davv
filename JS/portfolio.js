@@ -58,6 +58,10 @@
     };
     const hint=document.createElement('div');
     hint.className='scene-hint';
+    const hintEyebrow=document.createElement('span');hintEyebrow.className='scene-hint__eyebrow';
+    const hintTitle=document.createElement('span');hintTitle.className='scene-hint__title';
+    hint.append(hintEyebrow,hintTitle);
+    const setHint=label=>{hintEyebrow.textContent=label==='Home'?'Torna alla':label==='Video'?'Guarda':'Esplora';hintTitle.textContent=label;};
     hint.setAttribute('aria-hidden','true'); // Buttons already have descriptive accessible names.
     document.body.appendChild(hint);
     let keyboardMode=false;
@@ -81,7 +85,7 @@
       if(!label)return;
       element.addEventListener('pointerenter',event=>{
         if(event.pointerType==='touch')return;
-        hint.textContent=label;positionHint(event.clientX,event.clientY);
+        setHint(label);positionHint(event.clientX,event.clientY);
         hint.classList.add('is-visible');
       });
       element.addEventListener('pointermove',event=>{
@@ -92,7 +96,7 @@
       element.addEventListener('focus',()=>{
         if(!keyboardMode)return;
         const bounds=element.getBoundingClientRect();
-        hint.textContent=label;
+        setHint(label);
         positionHint(Math.max(12,Math.min(bounds.right,window.innerWidth-100)),
           Math.max(12,Math.min(bounds.top+bounds.height/2,window.innerHeight-70)));
         hint.classList.add('is-visible');

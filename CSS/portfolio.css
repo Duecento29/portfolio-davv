@@ -24,14 +24,29 @@ svg.scene-svg {
 .scene-svg .cursor:not(.scene-layer) { filter:none; }
 .scene-hint {
   position:fixed; z-index:80; pointer-events:none; margin:0;
-  padding:7px 11px; border-radius:7px;
-  background:rgba(250,248,242,.94); color:#302d27;
-  border:1px solid rgba(60,53,40,.12);
-  box-shadow:0 2px 10px rgba(0,0,0,.08);
-  font:500 12px/1.25 Arial,Helvetica,sans-serif; letter-spacing:.02em;
-  opacity:0; visibility:hidden; transition:opacity .16s ease,visibility .16s;
+  padding:14px 20px 18px; color:#f6f3ec; isolation:isolate;
+  font-family:Arial,Helvetica,sans-serif; white-space:nowrap;
+  text-shadow:0 2px 12px rgba(0,0,0,.8);
+  opacity:0; visibility:hidden; transform:translateY(6px);
+  transition:opacity .22s ease,transform .28s ease,visibility .22s;
 }
-.scene-hint.is-visible { opacity:1; visibility:visible; }
+/* A soft shade behind the type keeps it legible over both walls and furniture. */
+.scene-hint::before {
+  content:""; position:absolute; inset:-10px -14px; z-index:-1;
+  background:radial-gradient(ellipse,rgba(0,0,0,.76) 0%,rgba(0,0,0,.48) 42%,transparent 74%);
+  filter:blur(9px);
+}
+.scene-hint__eyebrow { display:block; margin-bottom:7px;
+  font-size:9px; font-weight:400; line-height:1; letter-spacing:.32em; text-transform:uppercase;
+}
+.scene-hint__title { display:block; font-size:36px; font-weight:400;
+  line-height:1.08; letter-spacing:-.035em;
+}
+.scene-hint.is-visible { opacity:1; visibility:visible; transform:translateY(0); }
+@media(max-width:600px) {
+  .scene-hint { padding:12px 16px 15px; }
+  .scene-hint__title { font-size:28px; }
+}
 /* Small-screen fallback to reach all the objects cropped by the cinematic SVG cover. */
 .portfolio-nav { box-sizing:border-box; position:fixed; z-index:50; bottom:max(14px,env(safe-area-inset-bottom));
   left:50%; transform:translateX(-50%); display:flex; align-items:center; gap:5px;

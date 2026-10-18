@@ -1,7 +1,7 @@
 /* Approved Test C: one continuous artwork from the surface to the rotating circle. */
 (() => {
 'use strict';
-const key='davv_intro_c_approved';
+const key='davv_intro_framed_4_3';
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 const replay=document.createElement('button');replay.className='intro-replay';replay.textContent='Rivedi intro';document.body.append(replay);
 let running=false;
@@ -15,7 +15,7 @@ async function play(){
  siblings.forEach(el=>el.inert=true);document.body.append(overlay);document.body.classList.add('intro-playing');
  const canvas=overlay.querySelector('canvas'),ctx=canvas.getContext('2d'),backdrop=overlay.querySelector('.intro-backdrop'),skip=overlay.querySelector('button');
  skip.focus({preventScroll:true});let stopped=false,frame,timer,portrait=false;
- const W=1280,H=720,images={},paper='#dcdbd8';
+ const W=1280,H=960,images={},paper='#dcdbd8';
  const clamp=x=>Math.max(0,Math.min(1,x));
  const smooth=x=>{x=clamp(x);return x*x*x*(x*(x*6-15)+10)};
  const mix=(a,b,t)=>a+(b-a)*t;
@@ -26,17 +26,18 @@ async function play(){
 function continuousArt(scale=1){
  const img=images['composizione-continua.png'];
  ctx.save();ctx.scale(scale,scale);
- // One square, outpainted texture: its central 16:9 area fills the first shot.
+ // One square texture, cropped to a 4:3 stage and then the rotating circle.
  // The circle reveals more of this same texture, with no swaps or mirrored joins.
  ctx.drawImage(img,-640,-640,1280,1280);ctx.restore();
 }
 function original(t){
+ ctx.save();ctx.beginPath();ctx.rect(0,0,W,H);ctx.clip();
  fill(paper);
  const untie=smooth((t-1.25)/1.8),turn=smooth((t-2.8)/1.55),spread=smooth((t-3.9)/1.6);
- const angle=Math.atan2(720,429)*turn;
+ const angle=Math.atan2(960,572)*turn;
  ctx.save();ctx.beginPath();ctx.rect(0,0,W,H);ctx.clip();
- if(spread>0){ctx.beginPath();ctx.moveTo(449-1500*spread,0);ctx.lineTo(449,0);ctx.lineTo(878,720);ctx.lineTo(878-1500*spread,720);ctx.closePath();ctx.fillStyle='#050505';ctx.fill()}
- ctx.translate(640+23.5*turn,360);ctx.rotate(angle);ctx.beginPath();
+ if(spread>0){ctx.beginPath();ctx.moveTo(377.5-1500*spread,0);ctx.lineTo(377.5,0);ctx.lineTo(949.5,960);ctx.lineTo(949.5-1500*spread,960);ctx.closePath();ctx.fillStyle='#050505';ctx.fill()}
+ ctx.translate(640+23.5*turn,480);ctx.rotate(angle);ctx.beginPath();
  for(let i=0;i<=420;i++){
  const u=i/420;
  // Progressively release folds along the thread, rather than stretching all loops in lockstep.
@@ -49,13 +50,14 @@ function original(t){
  ctx.strokeStyle='#080808';ctx.lineWidth=1.3;ctx.stroke();ctx.restore();
  // Reveal only the final composition. No intermediate collage, no 10.jpg / Try.png swaps.
  const reveal=smooth((t-5.05)/1.8);
- ctx.save();ctx.globalAlpha=reveal;ctx.translate(640,360);continuousArt();ctx.restore();
+ ctx.save();ctx.globalAlpha=reveal;ctx.translate(640,480);continuousArt();ctx.restore();
+ ctx.restore();
 }
 function tail(t){
  const morph=smooth(t/2.15),exit=smooth((t-5.4)/1.5);
  backdrop.style.opacity=String(1-exit);if(scene)scene.style.filter=`blur(${12*(1-exit)}px)`;
- const diameter=portrait?1100:540;
- const cx=640,cy=mix(360,305,morph),w=mix(1280,diameter,morph),h=mix(720,diameter,morph);
+ const diameter=840;
+ const cx=640,cy=mix(480,440,morph),w=mix(1280,diameter,morph),h=mix(960,diameter,morph);
  ctx.save();ctx.globalAlpha=1-exit;ctx.beginPath();ctx.roundRect(cx-w/2,cy-h/2,w,h,diameter/2*morph);ctx.clip();
  ctx.translate(cx,cy);
  // Rotation accelerates gently while the corners round; no disappearing iris or image swap.
@@ -63,7 +65,7 @@ function tail(t){
  ctx.rotate(angle*morph);continuousArt(mix(1,.57*diameter/540,morph));ctx.restore();
  const title=smooth((t-1.65)/1.1)*(1-exit);
  ctx.save();ctx.globalAlpha=title;ctx.fillStyle='#f6f3ec';ctx.textAlign='center';ctx.shadowColor='#0009';ctx.shadowBlur=20;
- ctx.font=`${portrait?30:11}px Arial`;ctx.letterSpacing='4px';ctx.fillText('PORTFOLIO',640,portrait?950:612);ctx.letterSpacing='-1.5px';ctx.font=`${portrait?94:52}px Arial`;ctx.fillText('Tommaso Caputo',640,portrait?1060:664);ctx.restore();
+ ctx.font=`${portrait?30:18}px Arial`;ctx.letterSpacing='4px';ctx.fillText('PORTFOLIO',640,920);ctx.letterSpacing='-1.5px';ctx.font=`${portrait?94:74}px Arial`;ctx.fillText('Tommaso Caputo',640,portrait?1040:1000);ctx.restore();
 }
 
  const img=new Image();img.src='assets/intro/composizione-continua.png';
@@ -75,9 +77,8 @@ function tail(t){
   const t=(now-start)/1000, width=innerWidth,height=innerHeight,dpr=Math.min(devicePixelRatio||1,2);
   if(canvas.width!==Math.round(width*dpr)||canvas.height!==Math.round(height*dpr)){canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr)}
   ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,width,height);
-  const scale=Math.min(width/W,height/H);portrait=height>width*1.2;
-  if(t<8&&!reduced.matches){ctx.fillStyle=paper;ctx.fillRect(0,0,width,height)}
-  ctx.translate((width-W*scale)/2,(height-H*scale)/2);ctx.scale(scale,scale);
+  const scale=Math.min(width*.9/W,height*.88/1120);portrait=height>width*1.2;
+  ctx.translate((width-W*scale)/2,(height-1120*scale)/2);ctx.scale(scale,scale);
   if(reduced.matches){tail(3);if(t>=1.6){finish();return}}
   else if(t<8)original(t);else if(t<15)tail(t-8);else{finish();return}
   frame=requestAnimationFrame(render);

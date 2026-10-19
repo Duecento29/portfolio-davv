@@ -50,4 +50,9 @@ html.mobile-site{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 #mobile-app .m-excerpt{margin:20px 0;padding:0 0 0 16px;border-left:2px solid #a58d58;color:#403b31}
 #mobile-app .m-excerpt p{font-family:Georgia,'Times New Roman',serif;font-size:18px;line-height:1.8;margin:0 0 22px}
 #mobile-app .m-excerpt p:last-child{margin-bottom:0}
+#mobile-app .m-project-details{border-top:1px solid #c9c4b8;border-bottom:1px solid #c9c4b8;margin:24px 0 0}
+#mobile-app .m-project-details summary{font-size:15px;padding:16px 0}
+#mobile-app .m-project-details figure{margin:0 0 24px}
+#mobile-app .m-project-details img{display:block;width:100%;height:auto;border-radius:10px;background:white}
+#mobile-app .m-project-details figcaption{font-size:14px;line-height:1.5;color:#646158;padding:10px 2px 0}
 @media(prefers-reduced-motion:reduce){#mobile-app .m-orbit__image{will-change:auto}}

@@ -1,6 +1,11 @@
 (() => {
  if(!window.DAVV_MOBILE)return;
  const ns='http://www.w3.org/2000/svg';
+ const projectPhotos={
+  chelys:[['chelys.jpg','Chelys: il guscio intrecciato e lo zaino.']],
+  coVR:[['covr-prototipo.png','Il prototipo coVR montato sul visore.']],
+  'Lampade, prototipi e sperimentazioni':[['lampada-materiali.jpg','Sperimentazione con carta e filo metallico.'],['lampada-accesa.jpg','Prova del paralume illuminato.']]
+ };
  const pages={home:['Home','index.html'],table:['Progetti','Tavolo_new.html'],mirror:['Visual','right-Home_0.3.html'],library:['Libreria','left-Home_0.2.html'],about:['About','about_0.2.html']};
  const page=document.body.dataset.page==='books'?'library':document.body.dataset.page;
  const app=document.createElement('div');app.id='mobile-app';
@@ -43,6 +48,11 @@
    const a=page==='table'?el('div','m-art'):link('',item.image,'m-art');if(page==='table'){a.setAttribute('role','img');a.setAttribute('aria-label',item.title)}else a.setAttribute('aria-label','Apri immagine completa: '+item.title);
    a.append(artwork(item.image,page==='library'?[201,365,650,480]:[55,181,910,686],page==='library'?[1920,910]:[1638,910]));card.append(a);
    if(item.text){const content=page==='library'?el('details','m-reading'):el('div','m-copy');const prose=page==='library'?el('blockquote','m-excerpt'):content;if(page==='library'){content.append(el('summary','','Leggi il brano'));content.append(prose)}for(const paragraph of item.text)prose.append(el('p','',paragraph));card.append(content)}
+   if(page==='table'&&projectPhotos[item.title]){
+    const details=el('details','m-project-details');details.append(el('summary','','Foto e dettagli del progetto'));
+    for(const [file,caption] of projectPhotos[item.title]){const figure=el('figure');const photo=el('img');photo.loading='lazy';photo.decoding='async';photo.src='assets/mobile/'+file;photo.alt=caption;figure.append(photo,el('figcaption','',caption));details.append(figure)}
+    card.append(details);
+   }
    if(page!=='table')card.append(link('Apri la tavola completa ↗',item.image,'m-original'));main.append(card);
   }
  }

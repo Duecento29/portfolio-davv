@@ -16,12 +16,16 @@ html.mobile-site{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 #mobile-app .m-kicker{font-size:12px;letter-spacing:.22em;text-transform:uppercase;font-weight:700;margin:0 0 16px}
 #mobile-app p{font-size:17px;line-height:1.7;margin:0 0 18px;white-space:pre-line;overflow-wrap:anywhere}
 #mobile-app .m-meta{font-size:14px;color:#68665f;margin-bottom:18px}
-#mobile-app .m-hero{display:block;width:100%;height:auto;border-radius:18px;margin:26px 0}
-#mobile-app .m-links{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:24px 0}
-#mobile-app .m-tile{display:flex;flex-direction:column;justify-content:space-between;min-height:116px;padding:18px;border:1px solid #c9c4b8;border-radius:16px;text-decoration:none;background:#faf9f5}
-#mobile-app .m-tile strong{font-size:22px;font-weight:500}
-#mobile-app .m-tile span{font-size:13px;color:#646158}
-#mobile-app .m-tile:hover,#mobile-app .m-tile:focus-visible{background:#e5dfd0}
+#mobile-app .m-orbit{position:relative;width:100%;max-width:420px;aspect-ratio:1;margin:32px auto 38px;border-radius:50%;overflow:hidden;background:#dcdbd8;box-shadow:0 12px 28px #25251f12}
+#mobile-app .m-orbit__image{position:absolute;display:block;width:135%;height:135%;max-width:none;left:-17.5%;top:-17.5%;object-fit:cover;transform-origin:center;will-change:transform}
+#mobile-app .m-links{display:flex;flex-direction:column;margin:24px 0;border-top:1px solid #c9c4b8}
+#mobile-app .m-tile{display:flex;align-items:center;gap:16px;min-height:100px;padding:22px 4px;border-bottom:1px solid #c9c4b8;text-decoration:none}
+#mobile-app .m-tile__number{font-size:11px;color:#81785e;letter-spacing:.08em;align-self:flex-start;padding-top:7px}
+#mobile-app .m-tile__copy{display:flex;flex:1;min-width:0;flex-direction:column;gap:5px}
+#mobile-app .m-tile strong{font-size:28px;line-height:1.2;font-weight:500;letter-spacing:-.035em}
+#mobile-app .m-tile__description{font-size:14px;color:#646158}
+#mobile-app .m-tile__arrow{font-size:25px;color:#81785e;margin-left:auto}
+#mobile-app .m-tile:hover,#mobile-app .m-tile:focus-visible{background:#e9e4d8}
 #mobile-app .m-card{padding:26px 0 34px;border-top:1px solid #c9c4b8;scroll-margin-top:20px}
 #mobile-app .m-art{display:block;width:100%;margin:0 0 22px;border-radius:12px;overflow:hidden;background:white;text-decoration:none}
 #mobile-app .m-art svg{display:block;width:100%;height:auto;max-height:none;position:static}
@@ -39,3 +43,11 @@ html.mobile-site{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 #mobile-app .m-profile{width:156px;max-width:100%;margin:0 0 22px;border-radius:50%;overflow:hidden}
 #mobile-app .m-profile svg{display:block;width:100%;height:auto}
 @media(max-width:360px){#mobile-app main{padding:25px 16px}#mobile-app .m-nav{left:6px;right:6px}#mobile-app .m-nav a{font-size:11px}}
+
+#mobile-app .m-reading{background:#eae4d8;border-radius:12px;padding:4px 18px;margin:20px 0}
+#mobile-app .m-reading summary{padding:14px 0;font-size:15px;letter-spacing:.02em}
+#mobile-app .m-reading[open] summary{margin-bottom:6px;border-bottom:1px solid #c9beaa}
+#mobile-app .m-excerpt{margin:20px 0;padding:0 0 0 16px;border-left:2px solid #a58d58;color:#403b31}
+#mobile-app .m-excerpt p{font-family:Georgia,'Times New Roman',serif;font-size:18px;line-height:1.8;margin:0 0 22px}
+#mobile-app .m-excerpt p:last-child{margin-bottom:0}
+@media(prefers-reduced-motion:reduce){#mobile-app .m-orbit__image{will-change:auto}}

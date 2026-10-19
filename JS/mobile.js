@@ -17,9 +17,15 @@
  function cvs(){const actions=el('div','m-actions');for(const language of ['Italiano','English']){const name=`Curriculum_Tommaso_Caputo_${language}.pdf`;const a=link('CV '+language+' ↓','assets/cv/'+name,'m-button');a.download=name;actions.append(a)}return actions}
  if(page==='home'){
   main.append(el('p','m-kicker','Portfolio'),el('h1','','Tommaso Caputo'));
-  const hero=el('img','m-hero');hero.src='assets/intro/composizione-sfondo-allineato.png';hero.alt='Composizione Vedo, sento, parlo';hero.width=1254;hero.height=1254;main.append(hero);
+  const orbit=el('div','m-orbit');
+  const hero=el('img','m-orbit__image');hero.src='assets/intro/composizione-sfondo-allineato.png';hero.alt='Composizione circolare Vedo, sento, parlo';hero.width=1254;hero.height=1254;orbit.append(hero);main.append(orbit);
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)');let frame=0,angle=0,target=0;
+  function paint(){angle+=(target-angle)*.12;if(Math.abs(target-angle)<.05)angle=target;hero.style.transform=`rotate(${angle}deg)`;frame=angle===target?0:requestAnimationFrame(paint)}
+  function turn(){target=reduced.matches?0:Math.min(110,Math.max(0,scrollY)*.14);if(!frame)frame=requestAnimationFrame(paint)}
+  addEventListener('scroll',turn,{passive:true});
+  reduced.addEventListener('change',()=>{cancelAnimationFrame(frame);frame=0;if(reduced.matches){angle=target=0;hero.style.transform='rotate(0deg)'}else turn()});turn();
   const links=el('div','m-links');const subtitles={table:'Design e sperimentazioni',mirror:'Opere e immagini',library:'Libri e letture',about:'Contatti e curriculum'};
-  for(const id of ['table','mirror','library','about']){const a=link('',pages[id][1],'m-tile');a.append(el('strong','',pages[id][0]+' ↗'),el('span','',subtitles[id]));links.append(a)}main.append(links);
+  for(const [i,id] of ['table','mirror','library','about'].entries()){const a=link('',pages[id][1],'m-tile');const copy=el('span','m-tile__copy');copy.append(el('strong','',pages[id][0]),el('span','m-tile__description',subtitles[id]));const arrow=el('span','m-tile__arrow','↗');arrow.setAttribute('aria-hidden','true');a.append(el('span','m-tile__number',String(i+1).padStart(2,'0')),copy,arrow);links.append(a)}main.append(links);
  }else if(page==='about'){
   main.append(el('p','m-kicker','About / Turi'),el('h1','','Tommaso Caputo'));
   const profile=el('div','m-profile');profile.append(artwork('IMG/ABOUT/about.png',[1174,250,230,230],[1638,910]));main.append(profile);
@@ -34,10 +40,10 @@
   for(const [i,item] of items.entries()){
    const card=el('article','m-card');card.id='scheda-'+(i+1);
    card.append(el('h2','',item.title));if(item.author||item.date)card.append(el('p','m-meta',item.author||item.date));
-   const a=link('',item.image,'m-art');a.setAttribute('aria-label','Apri immagine completa: '+item.title);
+   const a=page==='table'?el('div','m-art'):link('',item.image,'m-art');if(page==='table'){a.setAttribute('role','img');a.setAttribute('aria-label',item.title)}else a.setAttribute('aria-label','Apri immagine completa: '+item.title);
    a.append(artwork(item.image,page==='library'?[201,365,650,480]:[55,181,910,686],page==='library'?[1920,910]:[1638,910]));card.append(a);
-   if(item.text){const content=page==='library'?el('details'):el('div','m-copy');if(page==='library')content.append(el('summary','','Leggi il brano'));for(const paragraph of item.text)content.append(el('p','',paragraph));card.append(content)}
-   card.append(link('Apri la tavola completa ↗',item.image,'m-original'));main.append(card);
+   if(item.text){const content=page==='library'?el('details','m-reading'):el('div','m-copy');const prose=page==='library'?el('blockquote','m-excerpt'):content;if(page==='library'){content.append(el('summary','','Leggi il brano'));content.append(prose)}for(const paragraph of item.text)prose.append(el('p','',paragraph));card.append(content)}
+   if(page!=='table')card.append(link('Apri la tavola completa ↗',item.image,'m-original'));main.append(card);
   }
  }
  // Hide the desktop scene from both pointer and keyboard interaction on phones.

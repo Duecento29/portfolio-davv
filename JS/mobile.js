@@ -15,7 +15,7 @@
  // Display the photographic part of the existing board through an SVG viewport.
  // No source image is rewritten; the original full board remains available below.
  function artwork(src,box,size){const svg=document.createElementNS(ns,'svg');svg.setAttribute('viewBox',box.join(' '));svg.setAttribute('aria-hidden','true');const img=document.createElementNS(ns,'image');img.setAttribute('href',src);img.setAttribute('width',size[0]);img.setAttribute('height',size[1]);svg.append(img);return svg}
- const top=el('header','m-top');const brand=link('DAVV','index.html','m-brand');brand.append(el('span','','.'));top.append(brand,el('small','','Tommaso Caputo'));app.append(top);
+ const top=el('header','m-top');const brand=link('Portfolio','index.html','m-brand');top.append(brand,el('small','','Tommaso Caputo'));app.append(top);
  const main=el('main');main.id='contenuti';app.append(main);
  const nav=el('nav','m-nav');nav.setAttribute('aria-label','Navigazione portfolio');
  for(const [id,[label,url]] of Object.entries(pages)){const a=link(label,url);if(id===page)a.setAttribute('aria-current','page');nav.append(a)}app.append(nav);
